@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9A0F70E11CF3E02500459EC5 /* MemeModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A0F70E01CF3E02500459EC5 /* MemeModel.swift */; };
 		9ADCFE791CF35AA200E9B157 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADCFE781CF35AA200E9B157 /* AppDelegate.swift */; };
 		9ADCFE7B1CF35AA200E9B157 /* PickImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9ADCFE7A1CF35AA200E9B157 /* PickImageViewController.swift */; };
 		9ADCFE7E1CF35AA200E9B157 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9ADCFE7C1CF35AA200E9B157 /* Main.storyboard */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9A0F70E01CF3E02500459EC5 /* MemeModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemeModel.swift; sourceTree = "<group>"; };
 		9ADCFE751CF35AA200E9B157 /* MemeApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MemeApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9ADCFE781CF35AA200E9B157 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9ADCFE7A1CF35AA200E9B157 /* PickImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickImageViewController.swift; sourceTree = "<group>"; };
@@ -56,6 +58,7 @@
 			children = (
 				9ADCFE781CF35AA200E9B157 /* AppDelegate.swift */,
 				9ADCFE7A1CF35AA200E9B157 /* PickImageViewController.swift */,
+				9A0F70E01CF3E02500459EC5 /* MemeModel.swift */,
 				9ADCFE7C1CF35AA200E9B157 /* Main.storyboard */,
 				9ADCFE7F1CF35AA200E9B157 /* Assets.xcassets */,
 				9ADCFE811CF35AA200E9B157 /* LaunchScreen.storyboard */,
@@ -136,6 +139,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9ADCFE7B1CF35AA200E9B157 /* PickImageViewController.swift in Sources */,
+				9A0F70E11CF3E02500459EC5 /* MemeModel.swift in Sources */,
 				9ADCFE791CF35AA200E9B157 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -286,6 +290,7 @@
 				9ADCFE891CF35AA200E9B157 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

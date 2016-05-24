@@ -13,7 +13,12 @@ class PickImageViewController: UIViewController, UIImagePickerControllerDelegate
     @IBOutlet weak var topTextField: UITextField!
     @IBOutlet weak var bottomTextField: UITextField!
     @IBOutlet weak var selectedImageView: UIImageView!
-    
+    @IBOutlet weak var shareButton: UIBarButtonItem!
+    @IBOutlet weak var toolbar: UIToolbar!
+    @IBOutlet weak var cameraButton: UIBarButtonItem!
+
+    var selectedImage: UIImage?
+
     
     let memeTextAttributes = [
         NSStrokeColorAttributeName: UIColor.blackColor(),
@@ -45,6 +50,28 @@ class PickImageViewController: UIViewController, UIImagePickerControllerDelegate
     override func viewWillAppear(animated: Bool)
     {
         super.viewWillAppear(animated)
+        
+        // Disable camera button if not available
+        if !UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.Camera)
+        {
+            cameraButton.enabled = false
+        }
+        
+        if let selectedImage = selectedImage
+        {
+            selectedImageView.image = selectedImage
+        }
+        
+        // Disable share button initially
+        if selectedImageView.image == nil
+        {
+            shareButton.enabled = false
+        }
+        else
+        {
+            shareButton.enabled = true
+        }
+        
         subscribeToKeyboardNotification()
     }
     
@@ -73,6 +100,34 @@ class PickImageViewController: UIViewController, UIImagePickerControllerDelegate
         pickerController.sourceType = .PhotoLibrary
         presentViewController(pickerController, animated: true, completion: nil)
     }
+    
+    
+    @IBAction func shareButtonTapped(sender: AnyObject)
+    {
+        // Generate a memed image
+        let savedMemedImage = generateMemedImage()
+
+        // Define an instance of the ActivityViewController
+        // Pass the memed image to the ActivityViewController as an Activity item
+        let activityViewController = UIActivityViewController(activityItems: [savedMemedImage], applicationActivities: nil)
+        activityViewController.completionWithItemsHandler = {(activity, completed, items, error) in
+            if (completed)
+            {
+                self.saveMeme()
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+            else
+            {
+                print("Inside error case")
+                self.dismissViewControllerAnimated(true, completion: nil)
+                // Go Back to the prevous View Controller
+                self.navigationController?.popViewControllerAnimated(true)
+                
+            }
+        }
+        presentViewController(activityViewController, animated: true, completion: nil)
+    }
+    
     
     // MARK: UIImagePickerControllerDelegate methods
 
@@ -159,6 +214,37 @@ class PickImageViewController: UIViewController, UIImagePickerControllerDelegate
         let userInfo = notification.userInfo!
         let keyboardDimension = userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue
         return keyboardDimension.CGRectValue().height
+    }
+    
+    // MARK: - MemedImage helper methods
+    
+    func saveMeme()
+    {
+        let memedImage = generateMemedImage()
+
+        // Create MemeModel object
+        let memeObject = MemeModel(topText: topTextField.text!, bottomText: bottomTextField.text!, originalImage: selectedImageView.image!, memedImage: memedImage)
+
+        // Save it to the array defined in AppDelegate
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate.memes.append(memeObject)
+    }
+    
+    
+    
+    func generateMemedImage() -> UIImage
+    {
+        // Remove navbar and toolbar from the image
+        let desiredSize = CGSize(width: view.frame.width, height: view.frame.height - toolbar.frame.height)
+        
+        // Grab image
+        UIGraphicsBeginImageContext(desiredSize)
+        view.drawViewHierarchyInRect(view.frame, afterScreenUpdates: true)
+        let memedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return memedImage
+        
     }
     
     
