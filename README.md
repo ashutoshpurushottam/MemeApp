@@ -8,4 +8,4 @@ course [UIKit Fundamentals](https://www.udacity.com/course/uikit-fundamentals--u
 1. Clone or download the repository in you local computer
 2. Open XCode and choose open another project option. 
 3. After the project loads you can run the project by hitting play button
-4. The application uses Swift2 syntax. Slight modifications is needed to make it compatible with Swift3.
+4. The application uses Swift2 syntax. Some modifications are needed to make it compatible with Swift3.
